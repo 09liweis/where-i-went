@@ -7,6 +7,7 @@ router.get('/', function(req, res) {
     {
         title: 'Where I Went',
         menu: 'home',
+        user: req.user
     }
     );
 });

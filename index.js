@@ -1,7 +1,32 @@
 var express = require('express');
+var session = require('express-session');
+var bodyParser = require('body-parser');
+var morgan = require('morgan');
+var passport = require('passport');
+var LocalStrategy = require('passport-local').Strategy;
+
+var mongoose = require('mongoose');
+mongoose.connect('mongodb://' + process.env.IP + '/where_i_went', function(err) {
+    if (err) {
+        
+    }
+});
+
 var app = express();
 
 app.set('port', (process.env.PORT || 5000));
+
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extented: false}));
+
+// use morgan to log requests to the console
+app.use(morgan('dev'));
+
+// Express Session
+app.use(session({
+    secret: 'seret',
+}));
 
 app.use(express.static(__dirname + '/public'));
 
@@ -9,9 +34,14 @@ app.use(express.static(__dirname + '/public'));
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 
-var index = require('./routes/index');
+// routes
+var pages = require('./routes/index');
+var user = require('./routes/user');
+var trip = require('./routes/trip');
 
-app.use('/', index);
+app.use('/', pages);
+app.use('/user', user);
+app.use('/trip', trip);
 
 app.listen(app.get('port'), function() {
   console.log('Node app is running on port', app.get('port'));
