@@ -38,10 +38,12 @@ app.set('view engine', 'ejs');
 var pages = require('./routes/index');
 var user = require('./routes/user');
 var trip = require('./routes/trip');
+var photo = require('./routes/photo');
 
 app.use('/', pages);
 app.use('/user', user);
 app.use('/trip', trip);
+app.use('/photo', photo);
 
 app.listen(app.get('port'), function() {
   console.log('Node app is running on port', app.get('port'));

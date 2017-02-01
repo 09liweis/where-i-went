@@ -21,7 +21,13 @@
         </figure>
         Profile
       </a>
-      <a href="/user/login" class="nav-item is-tab <%=menu == 'login' ? 'is-active': ''%>">Log in</a>
+      <% if (user) { %>
+      <a href="/user/dashboard" class="nav-item is-tab <%=menu == 'dashboard' ? 'is-active': ''%>">Dashboard</a>
+      <a href="/user/logout" class="nav-item is-tab">Log out</a>
+      <% } else { %>
+      <a href="/user/login" class="nav-item is-tab <%=menu == 'login' ? 'is-active': ''%>">Login</a>
+      <a href="/user/register" class="nav-item is-tab <%=menu == 'register' ? 'is-active': ''%>">Register</a>
+      <% } %>
     </div>
   </div>
 </nav>

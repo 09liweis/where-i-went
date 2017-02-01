@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <% include ../partials/header.ejs %>
+</head>
+
+<body>
+
+  <% include ../partials/nav.ejs %>
+  <main id="dashboard">
+    
+  </main>
+  <script>
+    var trips = <%- JSON.stringify(trips) %>;
+  </script>
+  <script type="text/babel" src="/js/dashboard/photo.js"></script>
+  <script type="text/babel" src="/js/dashboard/list.js"></script>
+  <script type="text/babel" src="/js/dashboard/form.js"></script>
+  <script type="text/babel" src="/js/dashboard/dashboard.js"></script>
+</body>
+</html>

@@ -2,22 +2,53 @@ var express = require('express');
 var router = express.Router();
 var passport = require('passport');
 var User = require('../models/user');
+var Trip = require('../models/trip');
 
 /* GET home page. */
-router.get('/login', function(req, res) {
-    res.render('pages/login',
-    {
-        title: 'Login',
-        menu: 'login'
+
+router.get('/dashboard', function(req, res) {
+    var user = req.session.user;
+    
+    if (user) {
+        Trip.find({user: user._id}, function(err, trips) {
+            if (err) {
+                res.send(err);
+            } else {
+                res.render('pages/dashboard', 
+                {
+                    title: 'Dashboard',
+                    menu: 'dashboard',
+                    user: user,
+                    trips: trips,
+                });
+            }
+        });
+    } else {
+        res.redirect('/user/login');
     }
-    );
+});
+
+router.get('/login', function(req, res) {
+    var user = req.session.user;
+    if (user) {
+        res.redirect('/dashboard');
+    } else {
+        res.render('pages/login',
+        {
+            title: 'Login',
+            menu: 'login',
+            user: '',
+        }
+        );
+    }
 });
 
 router.get('/register', function(req, res) {
     res.render('pages/register',
     {
         title: 'Register',
-        menu: 'register'
+        menu: 'register',
+        user: ''
     }
     );
 });
@@ -69,7 +100,7 @@ router.post('/login', function(req, res) {
     });
 });
 
-router.post('/logout', function(req, res) {
+router.get('/logout', function(req, res) {
     req.session.destroy();
     res.redirect('/');
 });
