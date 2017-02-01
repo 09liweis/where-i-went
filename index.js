@@ -6,11 +6,18 @@ var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://' + process.env.IP + '/where_i_went', function(err) {
+if (process.env.C9_USER) {
+    var mongodb = 'mongodb://' + process.env.IP + '/where_i_went';
+} else {
+    var mongodb = 'mongodb://heroku_rsqsx1tm:p03f8o6bbsj1km0gulchhnt5tl@ds139619.mlab.com:39619/heroku_rsqsx1tm';
+}
+mongoose.connect(mongodb, function(err) {
     if (err) {
         
     }
 });
+
+console.log(process.env);
 
 var app = express();
 
