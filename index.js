@@ -17,8 +17,6 @@ mongoose.connect(mongodb, function(err) {
     }
 });
 
-console.log(process.env);
-
 var app = express();
 
 app.set('port', (process.env.PORT || 5000));

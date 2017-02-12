@@ -90,6 +90,7 @@ var Dashboard = React.createClass({
                         <li className={this.renderActiveTab('form')}><a onClick={this.changeTab} name="form">{this.state.formAction}</a></li>
                     </ul>
                 </div>
+                <Search />
                 { (this.state.currentTab == 'form') ? <Trip submitEdit={this.submitEdit} handleAdd={this.handleAdd} editTrip={this.state.editTrip} /> : '' }
                 { (this.state.currentTab == 'list') ? <List trips={this.state.trips} handleEdit={this.handleEdit} handleDelete={this.handleDelete} /> : '' }
             </div>
