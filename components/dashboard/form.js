@@ -1,3 +1,7 @@
+import React from 'react';
+import Photo from './photo.js';
+import Map from './map.js';
+
 var Trip = React.createClass({
     getInitialState() {
         if (this.props.editTrip.hasOwnProperty('name')) {
@@ -67,6 +71,21 @@ var Trip = React.createClass({
             trip: trip
         });
     },
+    
+    renderLocationOnForm(location) {
+        console.log(location);
+        this.setState({
+            trip: {
+                name: location.name,
+                address: location.formatted_address,
+                lat: location.geometry.location.lat(),
+                long: location.geometry.location.lng(),
+                photo: '',
+                description: '',
+                routes: []
+            }
+        });
+    },
 
     render() {
         var trip = this.state.trip;
@@ -134,9 +153,11 @@ var Trip = React.createClass({
                     : '' }
                 </div>
                 <div className="column">
-                    <Map />
+                    <Map renderLocationOnForm={this.renderLocationOnForm} />
                 </div>
             </div>
         );
     }
 });
+
+export default Trip;

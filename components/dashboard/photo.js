@@ -1,3 +1,4 @@
+import React from 'react';
 //photo cms for upload and select photo
 var Photo = React.createClass({
     getInitialState() {
@@ -127,3 +128,4 @@ var Photo = React.createClass({
         );
     },
 });
+export default Photo;

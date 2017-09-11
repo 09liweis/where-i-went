@@ -1,3 +1,5 @@
+import React from 'react';
+
 var Map = React.createClass({
     getInitialState() {
         return {
@@ -17,7 +19,7 @@ var Map = React.createClass({
                 if (_this.state.map == '') {
                     var map = new google.maps.Map(document.getElementById('map'), {
                         center: new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude),
-                        zoom: 4
+                        zoom: 10
                     });
                     _this.setState({map: map});
                 }
@@ -52,7 +54,7 @@ var Map = React.createClass({
                 google.maps.event.addListener(marker, 'click', function() {
                     _this.state.service.getDetails(place, function(result, status) {
                         if (status == google.maps.places.PlacesServiceStatus.OK) {
-                            console.log(result);
+                            _this.props.renderLocationOnForm(result);
                         }
                     });
                 });
@@ -78,3 +80,4 @@ var Map = React.createClass({
         );
     }
 });
+export default Map;

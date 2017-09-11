@@ -1,3 +1,5 @@
+import React from 'react';
+
 var List = React.createClass({
     handleDelete(id) {
         this.props.handleDelete(id);
@@ -35,3 +37,4 @@ var List = React.createClass({
         );   
     }
 });
+export default List;

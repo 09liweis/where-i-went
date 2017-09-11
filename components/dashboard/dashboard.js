@@ -1,4 +1,8 @@
+import React from 'react';
+import {render} from 'react-dom';
 
+import List from './list.js';
+import Trip from './form.js';
 
 var Dashboard = React.createClass({
     
@@ -81,7 +85,7 @@ var Dashboard = React.createClass({
         return (this.state.currentTab == tab) ? 'is-active' : '';
     },
 
-    render:function(){
+    render(){
         return(
             <div className="container">
                 <div className="tabs is-centered">
@@ -97,4 +101,4 @@ var Dashboard = React.createClass({
     }
 });
 
-ReactDOM.render(<Dashboard trips={trips} />, document.getElementById("dashboard"));
+render(<Dashboard trips={trips} />, document.getElementById("dashboard"));
