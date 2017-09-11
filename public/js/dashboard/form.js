@@ -78,59 +78,64 @@ var Trip = React.createClass({
             });
         }
         return (
-            <div className="">
-                <label className="label">Name</label>
-                <div className="control">
-                    <input className="input" name="name" type="text" onChange={this.handleChange} value={trip.name} />
-                </div>
-                <label className="label">Photo</label>
-                <div className="control">
-                    { trip.photo !== '' ? <img src={trip.photo} /> : '' }
-                    <input className="input" name="photo" type="text" onChange={this.handleChange} value={trip.photo} />
-                    <button className="button" onClick={this.togglePhotoModal}>Select Photo</button>
-                </div>
-                <label className="label">Description</label>
-                <div className="control">
-                    <textarea className="textarea" name="description" onChange={this.handleChange} value={trip.description}></textarea>
-                </div>
-                <label className="label">Address</label>
-                <div className="control">
-                    <input className="input" name="address" type="text" onChange={this.handleChange} value={trip.address} />
-                </div>
-                <label className="label">Coordinate</label>
-                <div className="control is-grouped">
-                    <label className="label">Latitude</label>
-                    <div className="control is-expanded">
-                        <input className="input" name="lat" type="text" onChange={this.handleChange} value={trip.lat} />
-                    </div>
-                    <label className="label">Longitude</label>
-                    <div className="control is-expanded">
-                        <input className="input" name="long" type="text" onChange={this.handleChange} value={trip.long} />
-                    </div>
-                </div>
-                
-                <label className="label">Routes</label>
-                <div className="control column is-half is-offset-one-quarter">
-                    {routes}
+            <div className="columns">
+                <div className="column">
                     <label className="label">Name</label>
-                    <input className="input" ref="route" name="route" type="text" />
-                    <label className="label">address</label>
-                    <input className="input" ref="address" name="address" type="text" />
-                    <button className="button" onClick={this.addRoute}>Add Route</button>
-                </div>
-                
-                <div className="control is-grouped">
                     <div className="control">
-                        { (this.props.editTrip.hasOwnProperty('name')) ?
-                        <button className="button is-primary" onClick={this.submitEdit}>Edit</button>
-                        : 
-                        <button className="button is-primary" onClick={this.handleAdd}>Add</button>
-                        }
+                        <input className="input" name="name" type="text" onChange={this.handleChange} value={trip.name} />
                     </div>
+                    <label className="label">Photo</label>
+                    <div className="control">
+                        { trip.photo !== '' ? <img src={trip.photo} /> : '' }
+                        <input className="input" name="photo" type="text" onChange={this.handleChange} value={trip.photo} />
+                        <button className="button" onClick={this.togglePhotoModal}>Select Photo</button>
+                    </div>
+                    <label className="label">Description</label>
+                    <div className="control">
+                        <textarea className="textarea" name="description" onChange={this.handleChange} value={trip.description}></textarea>
+                    </div>
+                    <label className="label">Address</label>
+                    <div className="control">
+                        <input className="input" name="address" type="text" onChange={this.handleChange} value={trip.address} />
+                    </div>
+                    <label className="label">Coordinate</label>
+                    <div className="control is-grouped">
+                        <label className="label">Latitude</label>
+                        <div className="control is-expanded">
+                            <input className="input" name="lat" type="text" onChange={this.handleChange} value={trip.lat} />
+                        </div>
+                        <label className="label">Longitude</label>
+                        <div className="control is-expanded">
+                            <input className="input" name="long" type="text" onChange={this.handleChange} value={trip.long} />
+                        </div>
+                    </div>
+                    
+                    <label className="label">Routes</label>
+                    <div className="control column is-half is-offset-one-quarter">
+                        {routes}
+                        <label className="label">Name</label>
+                        <input className="input" ref="route" name="route" type="text" />
+                        <label className="label">address</label>
+                        <input className="input" ref="address" name="address" type="text" />
+                        <button className="button" onClick={this.addRoute}>Add Route</button>
+                    </div>
+                    
+                    <div className="control is-grouped">
+                        <div className="control">
+                            { (this.props.editTrip.hasOwnProperty('name')) ?
+                            <button className="button is-primary" onClick={this.submitEdit}>Edit</button>
+                            : 
+                            <button className="button is-primary" onClick={this.handleAdd}>Add</button>
+                            }
+                        </div>
+                    </div>
+                    { (this.state.photoModal === true) ?
+                    <Photo photoModal={this.state.photoModal} selectPhoto={this.selectPhoto} togglePhotoModal={this.togglePhotoModal} />
+                    : '' }
                 </div>
-                { (this.state.photoModal === true) ?
-                <Photo photoModal={this.state.photoModal} selectPhoto={this.selectPhoto} togglePhotoModal={this.togglePhotoModal} />
-                : '' }
+                <div className="column">
+                    <Map />
+                </div>
             </div>
         );
     }
