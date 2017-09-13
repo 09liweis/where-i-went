@@ -20,6 +20,8 @@ router.post('/new', function(req, res) {
 
     var trip = new Trip();
     trip = createOrUpdate(trip, req);
+    trip.created_at = new Date();
+    trip.update_at = new Date();
     trip.user = user._id;
 
     trip.save(function(err, trip) {
@@ -46,6 +48,7 @@ router.put('/:id', function(req, res) {
             res.send(err);
         } else {
             trip = createOrUpdate(trip, req);
+            trip.update_at = new Date();
 
             trip.save(function(err, trip) {
                 if (err) {
